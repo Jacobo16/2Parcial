@@ -1,0 +1,77 @@
+#include<iostream>
+#include<ctime>
+#include<stdlib.h>
+int dado();
+using namespace std;
+int main() {
+    int v[101];
+    int p1=0, p2=0, tiro, tiro2;
+
+
+    srand(time(NULL));
+
+    for(int i=0; i<=101; i++)
+    {
+        v[i]=i;
+    }
+     v[4]=25; //escalera
+    v[13]=46; //escalera
+    v[33]=49; //escalera
+    v[50]=69; //escalera
+    v[42]=63;//escalera
+    v[62]=81; //escalera
+    v[74]=92; //escalera
+    v[40]=3; //serpiente
+    v[43]=18; //serpiente
+    v[27]=5; //serpiente
+    v[54]=31; //serpiente
+    v[66]=45; //serpiente
+    v[76]=58; //serpiente
+    v[89]=53; //serpiente
+    v[99]=41;  //serpiente
+
+    while(p1<100 && p2<100)
+    {
+        tiro=dado();
+        p1=v[p1];
+        cout<<"Dado Jugador 1:"<<tiro<<endl;
+        p1+=tiro;
+
+
+        //Jugador 2.
+        tiro2=dado();
+        p2=v[p2];
+        cout<<"Dado Jugador 2:"<<tiro2<<endl;
+        p2+=tiro2;
+
+        cout<<endl;
+
+        cout<<"1.Esta en la casilla"<<v[p1]<<endl;
+        cout<<"2.Estas en la casila"<<v[p2]<<endl;
+
+        cout<<endl;
+    }
+    if(p2>=100)
+    {
+        cout<<endl;
+        cout<<"Ganador 2"<<endl;
+    }
+    else if(p1>=100)
+    {
+        cout<<endl;
+        cout<<"Ganador 1"<<endl;
+    }
+
+
+
+    return 0;
+}
+
+int dado()
+{
+    int vd;
+
+    vd=(rand()%6)+1;
+
+    return vd;
+}
