@@ -1,0 +1,216 @@
+#include<iostream>
+int menu();
+void avanza(int m[][20], int x,int y, char posicion, int valor, int pluma);
+void mostrar(int m[][20], int rt);
+using namespace std;
+int main() {
+    int tablero[20][20]={0};
+    int pluma=0;
+    int tortuga[20]={0}, op;
+    int detiene=0;
+    char posicion='h';
+    int x=0;
+    int y=0;
+     //inicie a la tortuga viendo horizontal
+
+    do
+    {
+        op=menu();
+
+        switch(op)
+        {
+        case 1:
+
+            pluma=0;
+
+            cout<<"La pluma esta arriba"<<endl;
+            break;
+
+        case 2:
+            pluma=1;
+
+            cout<<"La pluma esta abajo"<<endl;
+            break;
+
+        case 3:
+            {
+                detiene=0;
+
+            if(detiene==0 && posicion=='h')// la tortuga esta en horizontal y haremos que vaya hacia abajo
+            {
+                posicion='a';
+                detiene=1;
+
+            }
+            if(detiene==0 && posicion=='a')//si la tortuga esta abajo, con esto validara que el cambio a la derecha horizontal
+            {
+                posicion='r';
+                detiene=1;
+            }
+            if(detiene=00 && posicion=='r')//con este if le dimos la vuelta a 360 grados a lla derecha a la tortuga
+            {
+                posicion='u';
+                detiene=1;
+            }
+            if(detiene==0 && posicion=='u')
+            {
+                posicion='h';
+                detiene=1;
+            }
+            }
+            cout<<"La tortuga giro a la derecha"<<endl;
+            cout<<endl;
+            break;
+
+        case 4:
+            {
+                detiene=0;
+
+                if(detiene==1 && posicion=='h')
+                {
+                    posicion='u';
+                    detiene=1;
+                }
+                if(detiene==1 && posicion=='u')
+                {
+                    posicion='r';
+                    detiene=1;
+                }
+                if(detiene==1&& posicion=='r')
+                {
+                    posicion='a';
+                    detiene=1;
+                }
+                if(detiene=1 && posicion=='a')
+                {
+                    posicion='h';
+                    detiene=1;
+                }
+            }
+            cout<<"Ha girado a la izquierda"<<endl;
+            break;
+
+        case 5:
+
+            avanza(tablero,x,y,posicion,10, pluma);
+
+            break;
+
+        case 6:
+
+            mostrar(tablero, 20);
+            break;
+        case 7:
+
+            cout<<menu();
+            break;
+        }
+
+
+    }
+    while(op!=8);
+
+    return 0;
+}
+int menu()
+{
+    cout<<"1.Pluma arriba"<<endl;
+    cout<<"2.Pluma abajo"<<endl;
+    cout<<"3.Girar derecha"<<endl;
+    cout<<"4.Girar izquiera"<<endl;
+    cout<<"5.Avanzar 10 espacios"<<endl;
+    cout<<"6.Mostrar talero"<<endl;
+    cout<<"8.Fin del programa"<<endl;
+    cout<<endl;
+
+    int m;
+
+    cin>>m;
+
+    return m;
+}
+
+void avanza(int m[][20], int x,int y ,char posicion, int valor, int pluma)
+{
+    int aux=10;
+    if(posicion=='a')
+    {
+        if(pluma==1)
+        {
+        for(int i=y; i<y+valor; i++)
+
+            if(i<20)
+            {
+                m[i][x]=1;
+
+            }
+        }
+        y+=valor-1;
+    }
+    if(posicion=='r')
+    {
+        if(pluma=1)
+        {
+            for(int i=y; i>aux-valor; i--)
+
+                if(i<20)
+                {
+                    m[x][i]=1;
+                }
+        }
+            y-=valor-1;
+    }
+    if(posicion=='u')
+    {
+        if(pluma==1)
+        {
+        for(int i=x; i>aux-valor; i--)
+
+            if(i<20)
+            {
+                m[i][y]=1;
+            }
+        }
+        x-=valor-1;
+
+    }
+
+    if(posicion=='h')
+    {
+        if(pluma==1)
+        {
+            for(int i=x; i<x+valor; i++)
+
+            if(i<20)
+            {
+                m[x][i]=1;
+            }
+
+
+        }
+            x+=valor-1;
+    }
+}
+
+void mostrar(int m[][20], int rt)
+{
+    cout<<endl;
+    for(int r=0; r<rt; r++)
+    {
+        for(int c=0; c<20; c++)
+        {
+            if(1==m[r][c])
+
+            cout<<"*";
+
+            else
+
+            cout<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+
+
+
